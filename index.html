@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Pomodoro Clock</title>
-    <script type="text/javascript" src="./clockLogic.js" async></script>
-    <script type="text/javascript" src="./bower_components/dist/jquery.min.js" async></script>
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./clockLogic.js"></script>
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
@@ -16,15 +16,15 @@
       </div>
       <div id="controls_container">
         <section id="settings">
-          <button type="button" name="button">+</button>
+          <button class="button add" value="break">+</button>
           <section id="break">5.00</section>
-          <button type="button" name="button">-</button>
-          <button type="button" name="button">+</button>
+          <button class="button subtract" value="break">-</button>
+          <button class="button add" value="work">+</button>
           <section id="work">25.00</section>
-          <button type="button" name="button">-</button>
+          <button class="button subtract" value="work">-</button>
         </section>
         <section id="go">
-          <button type="button" name="button">GO</button>
+          <button type="button" class="button">GO</button>
         </section>
 
       </div>
