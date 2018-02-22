@@ -17,6 +17,16 @@ $(document).ready(function(){
     AddTime($(this).val());
   });
 
+  $('#go').click(function() {
+    var timeleft = $('#timer').html();;
+    var downloadTimer = setInterval(function(){
+    timeleft = parseFloat(timeleft) - 0.01;
+    $('#timer').html(timeleft);
+    if(timeleft <= 0)
+        clearInterval(downloadTimer);
+    },1000);
+  });
+
   function AddToCounters(element, operator) {
     if(parseFloat($(element).html()) > 0 || operator === '+') {
       if(operator === '+') {
