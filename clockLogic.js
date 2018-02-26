@@ -1,11 +1,8 @@
 $(document).ready(function(){
-  var workTime;
-  var breakTime;
-  setWorkTimer($('#work').html());
 
-  function setWorkTimer(timeInMins) {
-    $('#timer').html(timeInMins);
-  }
+  var countDownTimer;
+
+  $('#timer').html($('#work').html());
 
   $('.add').click(function() {
     AddToCounters('#'+ $(this).val(), '+');
@@ -18,26 +15,33 @@ $(document).ready(function(){
   });
 
   $('#go').click(function() {
-    if($(this).hasClass("Go")) {
-      countDown($('#timer').html());
-      $(this).addClass("Stop");
-    } else if($(this).hasClass("Stop")) {
-      $(this).removeClass("Stop");
+    if($('#go').html() == 'GO') {
+      countDownTimer = setInterval(function(){
+        var timeleft = calculateCount($('#timer').html());
+        if(timeleft <= 0) {
+          clearInterval(countDownTimer);
+        }
+      },1000);
+    } else {
+      clearInterval(countDownTimer);
+      $('#timer').html($('#work').html());
     }
+    RunTimer('#go');
   });
 
-  function countDown(timeInSecs) {
-    var timeleft = timeInSecs;
-    var downloadTimer = setInterval(function(){
+  function calculateCount(totalTime) {
+    var timeleft = totalTime;
     timeleft = (parseFloat(timeleft) - 0.01).toFixed(2);
-    workTime = timeleft;
     $('#timer').html(timeleft);
-    if(timeleft <= 0 && $('#go').hasClass("Go")) {
-      clearInterval(downloadTimer);
+    return timeleft;
+  }
+
+  function RunTimer(elementName) {
+    if($(elementName).html() == 'GO') {
+      $(elementName).html('STOP');
     } else {
-      setWorkTimer($('#work').html());
+      $(elementName).html('GO');
     }
-    },1000);
   }
 
   function AddToCounters(element, operator) {
@@ -53,7 +57,7 @@ $(document).ready(function(){
   function AddTime( timeType) {
     if(timeType === 'work') {
       workTime = parseFloat($('#work').html()).toFixed(2);
-      setWorkTimer(workTime);
+      $('#timer').html(workTime);
     } else if(timeType === 'break') {
       breakTime = parseFloat($('#break').html()).toFixed(2);
     }
