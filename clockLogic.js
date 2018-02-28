@@ -15,11 +15,13 @@ $(document).ready(function(){
   });
 
   $('#go').click(function() {
-    if($('#go').html() == 'GO') {
+    if($(this).html() == 'GO') {
       countDownTimer = setInterval(function(){
         var timeleft = calculateCount($('#timer').html());
         if(timeleft <= 0) {
           clearInterval(countDownTimer);
+          setTimerNumber();
+          $(this).html('GO');
         }
       },1000);
     } else {
@@ -29,18 +31,33 @@ $(document).ready(function(){
     RunTimer('#go');
   });
 
+  function setTimerNumber() {
+    if($('#timerTitle').html() == 'Work') {
+      $('#timer').html($('#break').html());
+      $('#timerTitle').html('Break');
+    } else {
+      $('#timer').html($('#work').html());
+      $('#timerTitle').html('Work');
+    }
+  }
+
   function calculateCount(totalTime) {
     var timeleft = totalTime;
-    timeleft = (parseFloat(timeleft) - 0.01).toFixed(2);
+    var regex = /\d+\.00/g;
+    if(timeleft.match(regex)) {
+      timeleft = (parseFloat(timeleft) - 0.41).toFixed(2);
+    } else {
+      timeleft = (parseFloat(timeleft) - 0.01).toFixed(2);
+    }
     $('#timer').html(timeleft);
     return timeleft;
   }
 
-  function RunTimer(elementName) {
-    if($(elementName).html() == 'GO') {
-      $(elementName).html('STOP');
-    } else {
-      $(elementName).html('GO');
+  function RunTimer(element) {
+    if($(element).html() == 'GO') {
+      $(element).html('STOP');
+    } else if($(element).html() == 'STOP') {
+      $(element).html('GO');
     }
   }
 
@@ -54,11 +71,11 @@ $(document).ready(function(){
     }
   }
 
-  function AddTime( timeType) {
-    if(timeType === 'work') {
+  function AddTime(timerType) {
+    if(timerType === 'work') {
       workTime = parseFloat($('#work').html()).toFixed(2);
       $('#timer').html(workTime);
-    } else if(timeType === 'break') {
+    } else if(timerType === 'break') {
       breakTime = parseFloat($('#break').html()).toFixed(2);
     }
   }

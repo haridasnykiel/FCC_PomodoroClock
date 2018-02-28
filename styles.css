@@ -37,6 +37,11 @@ body {
   margin: 2em;
 }
 
+#timerTitle {
+  color: #D6A0FE;
+  font-size: 3em;
+}
+
 #timer {
   color: #D6A0FE;
   font-size: 5em;
