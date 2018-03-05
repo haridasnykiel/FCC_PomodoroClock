@@ -2,26 +2,26 @@ $(document).ready(function(){
 
   var countDownTimer;
 
-  $('#timer').html($('#work').html());
-
   $('.add').click(function() {
     AddToCounters('#'+ $(this).val(), '+');
-    AddTime($(this).val());
   });
 
   $('.subtract').click(function() {
     AddToCounters('#'+ $(this).val(), '-');
-    AddTime($(this).val());
   });
 
   $('#go').click(function() {
     if($(this).html() == 'GO') {
+      changeTitle();
+      setTimer();
       countDownTimer = setInterval(function(){
         var timeleft = calculateCount($('#timer').html());
         if(timeleft <= 0) {
           clearInterval(countDownTimer);
-          setTimerNumber();
-          $(this).html('GO');
+          $('#timerTitle').html('Break');
+          changeTitle();
+          setTimer();
+          $('#go').html('GO');
         }
       },1000);
     } else {
@@ -31,13 +31,19 @@ $(document).ready(function(){
     RunTimer('#go');
   });
 
-  function setTimerNumber() {
+  function setTimer() {
     if($('#timerTitle').html() == 'Work') {
-      $('#timer').html($('#break').html());
-      $('#timerTitle').html('Break');
-    } else {
       $('#timer').html($('#work').html());
+    } else if($('#timerTitle').html() == 'Break') {
+      $('#timer').html($('#break').html());
+    }
+  }
+
+  function changeTitle() {
+    if($('#timerTitle').html() === 'Break' || $('#timerTitle').html() === '') {
       $('#timerTitle').html('Work');
+    } else if($('#timerTitle').html() === 'Work'){
+      $('#timerTitle').html('Break');
     }
   }
 
@@ -62,21 +68,12 @@ $(document).ready(function(){
   }
 
   function AddToCounters(element, operator) {
-    if(parseFloat($(element).html()) > 0 || operator === '+') {
+    if(parseFloat($(element).html()) > 1 || operator === '+') {
       if(operator === '+') {
         $(element).html((parseFloat($(element).html()) + 1).toFixed(2));
       } else if(operator === '-') {
         $(element).html((parseFloat($(element).html()) - 1).toFixed(2));
       }
-    }
-  }
-
-  function AddTime(timerType) {
-    if(timerType === 'work') {
-      workTime = parseFloat($('#work').html()).toFixed(2);
-      $('#timer').html(workTime);
-    } else if(timerType === 'break') {
-      breakTime = parseFloat($('#break').html()).toFixed(2);
     }
   }
 
