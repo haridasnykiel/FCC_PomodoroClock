@@ -10,40 +10,41 @@ $(document).ready(function(){
     AddToCounters('#'+ $(this).val(), '-');
   });
 
+  $('#reset').click(function(){
+    $('#timerTitle').html('Lets Do Some Work');
+    $('#timer').html('25.00');
+  });
+
   $('#go').click(function() {
     if($(this).html() == 'GO') {
-      changeTitle();
-      setTimer();
+      if($('#timerTitle').html() == 'Lets Do Some Work') {
+        $('#timerTitle').html('Work');
+        $('#timer').html($('#work').html());
+      }
       countDownTimer = setInterval(function(){
         var timeleft = calculateCount($('#timer').html());
+        //var percentageDecrease = timeleft / 
+        $("#progress_bar").animate({height: "100%"});
         if(timeleft <= 0) {
           clearInterval(countDownTimer);
-          $('#timerTitle').html('Break');
-          changeTitle();
-          setTimer();
+          setTimerAndTitle();
           $('#go').html('GO');
         }
       },1000);
     } else {
       clearInterval(countDownTimer);
-      $('#timer').html($('#work').html());
+      //$('#timer').html($('#work').html());
     }
     RunTimer('#go');
   });
 
-  function setTimer() {
-    if($('#timerTitle').html() == 'Work') {
-      $('#timer').html($('#work').html());
-    } else if($('#timerTitle').html() == 'Break') {
-      $('#timer').html($('#break').html());
-    }
-  }
-
-  function changeTitle() {
-    if($('#timerTitle').html() === 'Break' || $('#timerTitle').html() === '') {
+  function setTimerAndTitle() {
+    if($('#timerTitle').html() == 'Break') {
       $('#timerTitle').html('Work');
-    } else if($('#timerTitle').html() === 'Work'){
+      $('#timer').html($('#work').html());
+    } else if($('#timerTitle').html() == 'Work') {
       $('#timerTitle').html('Break');
+      $('#timer').html($('#break').html());
     }
   }
 
@@ -61,8 +62,8 @@ $(document).ready(function(){
 
   function RunTimer(element) {
     if($(element).html() == 'GO') {
-      $(element).html('STOP');
-    } else if($(element).html() == 'STOP') {
+      $(element).html('PAUSE');
+    } else {
       $(element).html('GO');
     }
   }

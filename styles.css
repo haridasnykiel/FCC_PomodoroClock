@@ -30,7 +30,7 @@ body {
   align-items: center;
 }
 
-#animation {
+#progress_bar {
   height: 2em;
   width: 100%;
   background-color: #B14CFE;
@@ -58,6 +58,23 @@ body {
   color: #D6A0FE;
 }
 
+#titles {
+  display: flex;
+  color: #D6A0FE;
+}
+
+.title {
+  font-size: 3em;
+}
+
+#break_title {
+  padding-right: 1em;
+}
+
+#work_title {
+  padding-left: 1.2em;
+}
+
 #settings section {
   font-size: 4em;
 }
@@ -65,8 +82,8 @@ body {
 button {
   font-size: 4em;
   flex-grow: 1;
-}
-
-#go {
-
+  background-color: #F964FE;
+  margin: 0.1em;
+  border-radius: 0.2em;
+  border: none;
 }
