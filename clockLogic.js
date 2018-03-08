@@ -13,6 +13,8 @@ $(document).ready(function(){
   $('#reset').click(function(){
     $('#timerTitle').html('Lets Do Some Work');
     $('#timer').html('25.00');
+    $("#progress_bar").animate({width: "100%"});
+    clearInterval(countDownTimer);
   });
 
   $('#go').click(function() {
@@ -23,8 +25,10 @@ $(document).ready(function(){
       }
       countDownTimer = setInterval(function(){
         var timeleft = calculateCount($('#timer').html());
-        //var percentageDecrease = timeleft / 
-        $("#progress_bar").animate({height: "100%"});
+        var floatTimeLeft = parseFloat(timeleft);
+        var totalTime = parseFloat($('#work').html());
+        var percentageDecrease = floatTimeLeft/totalTime*100;
+        $("#progress_bar").animate({width: String(percentageDecrease) + "%"});
         if(timeleft <= 0) {
           clearInterval(countDownTimer);
           setTimerAndTitle();
@@ -33,7 +37,6 @@ $(document).ready(function(){
       },1000);
     } else {
       clearInterval(countDownTimer);
-      //$('#timer').html($('#work').html());
     }
     RunTimer('#go');
   });
