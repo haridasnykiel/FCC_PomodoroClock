@@ -13,8 +13,8 @@ $(document).ready(function(){
   $('#reset').click(function(){
     $('#timerTitle').html('Lets Do Some Work');
     $('#timer').html('25.00');
-    $("#progress_bar").animate({width: "100%"});
     clearInterval(countDownTimer);
+    $("#progress_bar").animate({width: "100%"});
   });
 
   $('#go').click(function() {
@@ -23,16 +23,19 @@ $(document).ready(function(){
         $('#timerTitle').html('Work');
         $('#timer').html($('#work').html());
       }
+      var totalTime = parseFloat($('#work').html());
+      var totalTimeInSeconds = totalTime * 60;
+      var remainingTimeInSeconds = totalTimeInSeconds;
       countDownTimer = setInterval(function(){
-        var timeleft = calculateCount($('#timer').html());
-        var floatTimeLeft = parseFloat(timeleft);
-        var totalTime = parseFloat($('#work').html());
-        var percentageDecrease = floatTimeLeft/totalTime*100;
-        $("#progress_bar").animate({width: String(percentageDecrease) + "%"});
+        var timeleft = parseFloat(calculateCount($('#timer').html()));
+        remainingTimeInSeconds -= 1;
+        var getPercentage = calculatePercentageForProgressBar(totalTimeInSeconds, remainingTimeInSeconds);
+        $("#progress_bar").animate({width: String(getPercentage) + "%"});
         if(timeleft <= 0) {
           clearInterval(countDownTimer);
           setTimerAndTitle();
           $('#go').html('GO');
+          $("#progress_bar").animate({width: "100%"});
         }
       },1000);
     } else {
@@ -40,6 +43,11 @@ $(document).ready(function(){
     }
     RunTimer('#go');
   });
+
+  function calculatePercentageForProgressBar(totalTimeInSecs, remainingTimeInSecs) {
+    var decrease = totalTimeInSecs-remainingTimeInSecs;
+    return 100-(decrease/totalTimeInSecs*100);
+  }
 
   function setTimerAndTitle() {
     if($('#timerTitle').html() == 'Break') {
