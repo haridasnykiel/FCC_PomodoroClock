@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
   var countDownTimer;
+  var colours = ["#870F77", "#8E5A87", "#56244F", "#DC98D3", "#9D53B7", "#D87DF9"];
 
   $('.add').click(function() {
     AddToCounters('#'+ $(this).val(), '+');
@@ -30,7 +31,10 @@ $(document).ready(function(){
         var timeleft = parseFloat(calculateCount($('#timer').html()));
         remainingTimeInSeconds -= 1;
         var getPercentage = calculatePercentageForProgressBar(totalTimeInSeconds, remainingTimeInSeconds);
-        $("#progress_bar").animate({width: String(getPercentage) + "%"});
+        $("#progress_bar").animate({
+            backgroundColor: colours[Math.round(GetRandomArrValue(colours))],
+            width: String(getPercentage) + "%"
+          });
         if(timeleft <= 0) {
           clearInterval(countDownTimer);
           setTimerAndTitle();
@@ -43,6 +47,10 @@ $(document).ready(function(){
     }
     RunTimer('#go');
   });
+
+  function GetRandomArrValue(arr) {
+    return Math.random() * (arr.length - 0) + 0;
+  }
 
   function calculatePercentageForProgressBar(totalTimeInSecs, remainingTimeInSecs) {
     var decrease = totalTimeInSecs-remainingTimeInSecs;
