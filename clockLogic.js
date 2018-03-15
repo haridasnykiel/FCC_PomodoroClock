@@ -1,7 +1,8 @@
 $(document).ready(function(){
 
   var countDownTimer;
-  var colours = ["#870F77", "#8E5A87", "#56244F", "#DC98D3", "#9D53B7", "#D87DF9"];
+  var colours = ["#870F77", "#8E5A87", "#56244F", "#DC98D3", "#9D53B7", "#D87DF9", "#5500ff", "#884dff",
+                  "#ff3377", "#ff99bb", "#b30000", "#ff9999"];
 
   $('.add').click(function() {
     AddToCounters('#'+ $(this).val(), '+');
@@ -15,7 +16,11 @@ $(document).ready(function(){
     $('#timerTitle').html('Lets Do Some Work');
     $('#timer').html('25.00');
     clearInterval(countDownTimer);
-    $("#progress_bar").animate({width: "100%"});
+    $("#progress_bar").animate({
+      width: "100%",
+      borderRadius: "0%"
+    });
+    $("#go").html('GO');
   });
 
   $('#go').click(function() {
@@ -33,13 +38,18 @@ $(document).ready(function(){
         var getPercentage = calculatePercentageForProgressBar(totalTimeInSeconds, remainingTimeInSeconds);
         $("#progress_bar").animate({
             backgroundColor: colours[Math.round(GetRandomArrValue(colours))],
-            width: String(getPercentage) + "%"
+            width: String(getPercentage) + "%",
+            borderRadius: String(getPercentage) + "%"
           });
         if(timeleft <= 0) {
           clearInterval(countDownTimer);
           setTimerAndTitle();
           $('#go').html('GO');
-          $("#progress_bar").animate({width: "100%"});
+          $("#progress_bar").animate({
+            width: "100%",
+            borderRadius: "0%"
+          });
+
         }
       },1000);
     } else {

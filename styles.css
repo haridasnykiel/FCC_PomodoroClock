@@ -31,10 +31,11 @@ body {
 }
 
 #progress_bar {
-  height: 3em;
+  height: 5em;
   width: 100%;
   background-color: #B14CFE;
   margin: 2em;
+  margin-top: 4em;
 }
 
 #timerTitle {
@@ -51,6 +52,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 1em;
 }
 
 #settings {
@@ -63,20 +65,18 @@ body {
   color: #D6A0FE;
 }
 
-.title {
+#titles section {
   font-size: 3em;
-}
-
-#break_title {
-  padding-right: 1em;
-}
-
-#work_title {
-  padding-left: 1.2em;
+  padding-left: 3em;
+  padding-right: 3em;
+  margin-bottom: 0.5em;
 }
 
 #settings section {
   font-size: 4em;
+  padding-top: 0.2em;
+  padding-right: 0.2em;
+  padding-left: 0.2em;
 }
 
 button {
@@ -86,4 +86,27 @@ button {
   margin: 0.1em;
   border-radius: 0.2em;
   border: none;
+  width: 2em;
+}
+
+#timerControls button {
+  width: 6em;
+}
+
+#timerControls button:active {
+  width: 5em;
+}
+
+.operation {
+  background-color: #ffccff;
+}
+
+.operation :active {
+  width: 5em;
+}
+
+.image {
+  width: 80%;
+  height: 80%;
+  padding: 1em;
 }
