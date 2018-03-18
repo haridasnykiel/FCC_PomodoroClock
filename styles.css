@@ -67,16 +67,17 @@ body {
 
 #titles section {
   font-size: 3em;
-  padding-left: 3em;
-  padding-right: 3em;
+  padding-left: 3.6em;
+  padding-right: 3.6em;
   margin-bottom: 0.5em;
 }
 
 #settings section {
   font-size: 4em;
   padding-top: 0.2em;
-  padding-right: 0.2em;
-  padding-left: 0.2em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  width: 3em;
 }
 
 button {
