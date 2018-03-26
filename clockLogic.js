@@ -20,6 +20,7 @@ $(document).ready(function(){
     $('#timer').html('25.00');
     clearInterval(countDownTimer);
     ProgressBarAnimation("#B14CFE", "100", "0");
+    BodyColourAnimation("#4B2362");
     $("#go").html('GO');
   });
 
@@ -42,11 +43,13 @@ $(document).ready(function(){
         var getPercentage = calculatePercentageForProgressBar(totalTimeInSeconds, remainingTimeInSeconds);
         ProgressBarAnimation(colours[Math.round(GetRandomArrValue(colours))],String(getPercentage),
         String(getPercentage));
+        BodyColourAnimation(colours[Math.round(GetRandomArrValue(colours))]);
         if(timeleft <= 0) {
           clearInterval(countDownTimer);
           setTimerAndTitle();
           $('#go').html('GO');
           ProgressBarAnimation("#B14CFE", "100", "0");
+          BodyColourAnimation("#4B2362");
           if($('#timerTitle').html() == 'Break') {
             PlayAudio("./audio/martial arts1.wav");
           } else {
@@ -80,6 +83,12 @@ $(document).ready(function(){
       backgroundColor: backgroundColor,
       width: width + "%",
       borderRadius: borderRadius + "%"
+    });
+  }
+
+  function BodyColourAnimation(backgroundColor) {
+    $("body").animate({
+      backgroundColor: backgroundColor
     });
   }
 

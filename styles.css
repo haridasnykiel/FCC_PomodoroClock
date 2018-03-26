@@ -61,7 +61,7 @@ body {
 }
 
 #settings section {
-  font-size: 2em;
+  font-size: 3em;
   padding-top: 0.2em;
   padding-right: 0.5em;
   padding-left: 0.5em;
@@ -74,6 +74,7 @@ body {
 
 .times {
   margin-right: 0.5em;
+  margin-top: 0.4em;
 }
 
 .timeSetter {
@@ -109,6 +110,10 @@ button {
   width: 70%;
   height: 70%;
   padding: 0.2em;
+}
+
+.minus {
+  margin-bottom: 0.8em;
 }
 
 @media screen and (max-width: 550px) {
